@@ -1,1 +1,37 @@
-index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volume Payment Integration</title>
+    <script src="https://cdn.getvolume.com/volume.js"></script>
+</head>
+<body>
+    <h1>Volume Payment Integration</h1>
+    <button id="payButton">Pay with Volume</button>
+
+    <script>
+        document.getElementById('payButton').addEventListener('click', () => {
+            const volume = new Volume({
+                merchantId: '2e1db961-0ad3-4164-91b9-e52cf81d4bbd',       // Replace with your live merchant ID
+                apiKey: 'b4cbc038-b9ca-4f68-9be1-f372adae35af',           // Replace with your live API key
+                environment: 'LIVE'                                       // Set environment to LIVE
+            });
+
+            volume.pay({
+                amount: 1000, // Amount in the smallest currency unit, e.g., cents for USD
+                currency: 'GBP',
+                reference: 'order_12345'
+            })
+            .then(response => {
+                console.log('Payment successful:', response);
+                alert('Payment successful!');
+            })
+            .catch(error => {
+                console.error('Payment failed:', error);
+                alert('Payment failed.');
+            });
+        });
+    </script>
+</body>
+</html>
